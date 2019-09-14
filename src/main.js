@@ -3,6 +3,13 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
+//引入vant组件
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+//使用vant包
+Vue.use(Vant);
+
 Vue.config.productionTip = false;
 
 new Vue({
