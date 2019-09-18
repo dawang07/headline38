@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <!-- 顶部 -->
     <van-nav-bar title="登录" />
 
@@ -51,31 +51,29 @@ export default {
   },
   methods: {
     //点击登录按钮事件
-    verify() {
+    async verify() {
       //点击验证规则
-      this.$validator.validate().then(async valid => {
-        if (valid) {
-          console.log("验证通过");
+      let valid = await this.$validator.validate();
+      if (valid) {
+        console.log("验证通过");
 
-          try {
-            //发送请求
-            let res = await useLogin({
-              mobile: this.mobile,
-              code: this.code
-            });
+        try {
+          //发送请求
+          let res = await useLogin({
+            mobile: this.mobile,
+            code: this.code
+          });
 
-            console.log(res);
-            //保存token
-            // setAuthor(res);
-            // 把token保存到store
-            this.$store.commit("setUse", res);
-            //页面跳转
-            this.$router.push("/home");
-          } catch (error) {
-            console.log("出错了");
-          }
+          console.log(res);
+         
+          // 把token保存到store
+          this.$store.commit("setUse", res);
+          //页面跳转
+          this.$router.push("/home");
+        } catch (error) {
+          console.log("出错了");
         }
-      });
+      }
     },
     //自定义提示信息
     setRulrs() {

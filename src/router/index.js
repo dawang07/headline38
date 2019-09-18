@@ -15,9 +15,19 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ "@/views/login")
     },
     {
-      path: "/home",
-      name: "home",
-      component: () => import( "@/views/home")
+      //路由重定向
+      path: "/",
+      redirect: "/home"
+    },
+    {
+      path: "/",
+      component: () => import("@/views/Tabbar"),
+      children: [
+        {
+          path: "home",
+          component: () => import("@/views/home")
+        }
+      ]
     }
   ]
 });

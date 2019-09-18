@@ -13,6 +13,8 @@ export default new Vuex.Store({
     // 设置use
     setUse(state, use) {
       author.setAuthor(use);
+      //讲用户信息更新到use
+      state.use = use;
     }
   },
   actions: {}

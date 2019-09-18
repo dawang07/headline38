@@ -1,4 +1,6 @@
 import axios from "axios";
+//引入store
+import store from "@/store";
 
 const instance = axios.create({
   //设置基地址
@@ -8,10 +10,17 @@ const instance = axios.create({
 });
 
 //请求拦截
-// Add a request interceptor
 instance.interceptors.request.use(
   function(config) {
     //请求成功
+
+    //判断用户是否是登录
+    let use = store.state.use;
+    if (use && use.token) {
+      //设置请求头 添加token
+      config.headers.Authorization = `Bearer ${use.token}`;
+      
+    }
     return config;
   },
   function(error) {
